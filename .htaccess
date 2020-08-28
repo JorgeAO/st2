@@ -1,0 +1,53 @@
+RewriteEngine on
+
+# --------------------------------------------------------------------------
+# URL's del módulo de seguridad
+# --------------------------------------------------------------------------
+	RewriteRule ^seguridad/login$	 							app/vistas/seguridad/seguridad/Login.php
+	RewriteRule ^seguridad/principal$				 			app/vistas/seguridad/seguridad/Principal.php
+	RewriteRule ^seguridad/cambiarClave$						app/vistas/seguridad/seguridad/CambiarClave.php
+	RewriteRule ^seguridad/recuperarCuenta$						app/vistas/seguridad/seguridad/RecuperarCuenta.php
+	RewriteRule ^seguridad/reestablecerClave/(\w+)/(\w+)$		app/vistas/seguridad/seguridad/ReestablecerClave.php?c=$1&t=$2
+
+	RewriteRule ^seguridad/permisos$				 			app/vistas/seguridad/permisos/Permisos.php
+
+	RewriteRule ^seguridad/perfiles$			 				app/vistas/seguridad/perfiles/Perfiles.php
+	RewriteRule ^seguridad/perfilesAdd$ 						app/vistas/seguridad/perfiles/PerfilesAdd.php
+	RewriteRule ^seguridad/perfilesUpd/(\w+)$			 		app/vistas/seguridad/perfiles/PerfilesUpd.php?cod=$1
+
+	RewriteRule ^seguridad/usuarios$				 			app/vistas/seguridad/usuarios/Usuarios.php
+	RewriteRule ^seguridad/usuariosAdd$ 						app/vistas/seguridad/usuarios/UsuariosAdd.php
+	RewriteRule ^seguridad/usuariosUpd/(\w+)$				 	app/vistas/seguridad/usuarios/UsuariosUpd.php?cod=$1
+
+
+# --------------------------------------------------------------------------
+# URL's del módulo de parámetros
+# --------------------------------------------------------------------------
+	RewriteRule ^parametros/tiposIdentificacion$ 				app/vistas/parametros/tiposIdentificacion/TiposIdentificacion.php
+	RewriteRule ^parametros/tiposIdentificacionAdd$				app/vistas/parametros/tiposIdentificacion/TiposIdentificacionAdd.php
+	RewriteRule ^parametros/tiposIdentificacionUpd/(\w+)$ 		app/vistas/parametros/tiposIdentificacion/TiposIdentificacionUpd.php?cod=$1
+
+	RewriteRule ^parametros/inversionistas$ 					app/vistas/parametros/inversionistas/Inversionistas.php
+	RewriteRule ^parametros/inversionistasAdd$					app/vistas/parametros/inversionistas/InversionistasAdd.php
+	RewriteRule ^parametros/inversionistasUpd/(\w+)$ 			app/vistas/parametros/inversionistas/InversionistasUpd.php?cod=$1
+	RewriteRule ^parametros/inversionistasDet/(\w+)$ 			app/vistas/parametros/inversionistas/InversionistasDet.php?cod=$1
+
+	RewriteRule ^parametros/clientes$		 					app/vistas/parametros/clientes/Clientes.php
+	RewriteRule ^parametros/clientesAdd$						app/vistas/parametros/clientes/ClientesAdd.php
+	RewriteRule ^parametros/clientesUpd/(\w+)$ 					app/vistas/parametros/clientes/ClientesUpd.php?cod=$1
+	RewriteRule ^parametros/clientesDet/(\w+)$ 					app/vistas/parametros/clientes/ClientesDet.php?cod=$1
+
+
+# --------------------------------------------------------------------------
+# URL's del módulo de caja y bancos
+# --------------------------------------------------------------------------
+	RewriteRule ^caja/movimientos$ 								app/vistas/caja/Movimientos/Movimientos.php
+	RewriteRule ^caja/movimientosAdd$							app/vistas/caja/Movimientos/MovimientosAdd.php
+
+
+# --------------------------------------------------------------------------
+# URL's del módulo de caja y bancos
+# --------------------------------------------------------------------------
+	RewriteRule ^prestamos/prestamos$ 							app/vistas/prestamos/prestamos/Prestamos.php
+	RewriteRule ^prestamos/prestamosAdd$						app/vistas/prestamos/prestamos/PrestamosAdd.php
+	RewriteRule ^prestamos/prestamosDet/(\w+)$					app/vistas/prestamos/prestamos/PrestamosDet.php?cod=$1

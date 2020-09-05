@@ -32,8 +32,7 @@ class CtrlPrestamos extends Control
 		} 
 		catch (Exception $e) 
 		{
-			throw new Exception('CtrlPrestamos.intCalcular');
-			
+			throw new Exception('CtrlPrestamos.intCalcular: '.$e->getMessage());
 		}
 	}
 
@@ -143,6 +142,38 @@ class CtrlPrestamos extends Control
 		catch (Exception $e) 
 		{
 			throw new Exception('CtrlMovimientos.insertar: '.$e->getMessage());
+		}
+	}
+
+	public function detalles($arrParametros)
+	{
+		try 
+		{
+			// Consultar los préstamos para obtener la información general
+			$clsPrestamos = new ClsPrestamos();
+			$arrPrestamos = $clsPrestamos->consultar([ 
+				'pres.pres_codigo' => $arrParametros['pres_codigo'] 
+			]);
+
+			// Consultar cuotas
+			$clsCoutas = new ClsCuotas();
+			$arrCuotas = $clsCoutas->consultar([ 'fk_pre_prestamos' => $arrParametros['pres_codigo'] ]);
+
+			// Consultar participación
+			$clsParticipacion = new ClsParticipacion();
+			$arrParticipacion = $clsParticipacion->consultar([ 'fk_pre_prestamos' => $arrParametros['pres_codigo'] ]);
+
+			$arrDatos['prestamo'] = $arrPrestamos;
+			$arrDatos['cuotas'] = $arrCuotas;
+			$arrDatos['participacion'] = $arrParticipacion;
+
+			$objRta->tipo = 'exito';
+			$objRta->datos = $arrDatos;
+			return $objRta;
+		} 
+		catch (Exception $e) 
+		{
+			throw new Exception('CtrlPrestamos.detalles: '.$e->getMessage());
 		}
 	}
 }

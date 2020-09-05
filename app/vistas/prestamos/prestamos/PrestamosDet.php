@@ -16,147 +16,158 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-
-		$('#pres_fecha').datepicker({
-			format: "yyyy-mm-dd",
-			todayBtn: "linked",
-			language: "es"
-		});
-		
-		enviarPeticion('clientes/listar',
-			{ 'clie.fk_par_estados':'1' }, 
-			function(rta){
-				$('#fk_par_clientes').append('<option value="">-- Seleccione --</option>');
-				$.each(rta.datos, function(i, val){
-					$('#fk_par_clientes').append('<option value="'+val['clie_codigo']+'">' + val['clie_identificacion']+' - '+val['clie_nombre']+' '+val['clie_apellido']+'</option>');
-				});
-			}
-		);
-
-		$("#fk_par_clientes").select2({
-			placeholder:'-- Seleccione --'
-		});
-
-		/*$('.intCalcular').on('change', function(){
-			intCalcular();
-		});*/
-
-		$('#btn_int_calcular').on('click', function(){
-			intCalcular();
-		});
-
-		$('#btn_aceptar').on('click', function(){
-			let valido = true;
-			$.each($('.validar'), function(i, val){
-				valido = validarCampo(val.id);
-			});
-
-			if (valido == true)
-			{
-				enviarPeticion('prestamos/insertar',
-					{
-						'fk_par_clientes':$('#fk_par_clientes').val(),
-						'pres_fecha':$('#pres_fecha').val(),
-						'pres_vlr_monto':$('#pres_vlr_monto').val(),
-						'pres_plazo':$('#pres_plazo').val(),
-						'pres_interes':$('#pres_interes').val(),
-						'pres_int_mensual':$('#pres_int_mensual').val(),
-						'pres_int_total':$('#pres_int_total').val(),
-						'pres_vlr_pago':$('#pres_vlr_pago').val(),
-						'pres_vlr_cuota':$('#pres_vlr_cuota').val()
-					}, 
-					function(rta){
-						alert(rta.mensaje);
-						if (rta.tipo == 'exito')
-							window.location.href = 'prestamos';
-					}
-				);
-			}
-		});
-
-		$('#btn_guardar').on('click', function(){
-			let valido = true;
-			$.each($('.validar'), function(i, val){
-				valido = validarCampo(val.id);
-			});
-
-			if (valido == true)
-			{
-				enviarPeticion('prestamos/insertar',
-					{
-						'fk_par_clientes':$('#fk_par_clientes').val(),
-						'pres_fecha':$('#pres_fecha').val(),
-						'pres_vlr_monto':$('#pres_vlr_monto').val(),
-						'pres_plazo':$('#pres_plazo').val(),
-						'pres_interes':$('#pres_interes').val(),
-						'pres_int_mensual':$('#pres_int_mensual').val(),
-						'pres_int_total':$('#pres_int_total').val(),
-						'pres_vlr_pago':$('#pres_vlr_pago').val(),
-						'pres_vlr_cuota':$('#pres_vlr_cuota').val()
-					}, 
-					function(rta){
-						alert(rta.mensaje);
-						if (rta.tipo == 'exito')
-							window.location.href = 'prestamosAdd';
-					}
-				);
-			}
-		});
-	});
-
-	function intCalcular()
-	{
 		enviarPeticion(
-			'prestamos/intCalcular',
+			'prestamos/detalles',
 			{
-				'pres_vlr_monto':$('#pres_vlr_monto').val(),
-				'pres_plazo':$('#pres_plazo').val(),
-				'pres_interes':$('#pres_interes').val()
+				'pres_codigo':<?=$_REQUEST['cod']?>
 			}, 
 			function(rta){
-				if (rta.tipo == 'exito'){
-					$.each(rta.datos[0], function(i, val){
-						$('#'+i).val(val);
+				if (rta.tipo == 'exito')
+				{
+					console.info(rta.datos.cuotas);
+					// Cargar información del préstamo y del cliente
+					$.each(rta.datos.prestamo[0], function(i, val){
+						$('#lbl_'+i).html(val);
 					});
+
+					// Cargar información de las cuotas
+					var tbl_cuotas = '<table id="tbl_resultados" class="table table-hover table-bordered table-striped table-sm texto-12" width="100%" cellspacing="0">'+
+						'<thead>'+
+						'<tr>'+
+						'<th>Préstamo</th>'+
+						'<th>Cuota</th>'+
+						'<th>Fecha</th>'+
+						'<th>Valor</th>'+
+						'<th>Estado</th>'+
+						'<th>Fecha Pago</th>'+
+						'<th>Valor Pago</th>'+
+						'</tr>'+
+						'</thead>'+
+						'<tbody>';
+
+					$.each(rta.datos.cuotas, function(i, val){
+						tbl_cuotas += '<tr>'+
+							'<td>'+val['fk_pre_prestamos']+'</td>'+
+							'<td>'+val['prcu_codigo']+'</td>'+
+							'<td>'+val['prcu_fecha']+'</td>'+
+							'<td>'+val['prcu_valor']+'</td>'+
+							'<td>'+val['esta_descripcion']+'</td>'+
+							'<td>'+val['prcu_valor_pago']+'</td>'+
+							'<td>'+val['prcu_fecha_pago']+'</td>'+
+							'</tr>';
+					});
+
+					tbl_cuotas += '</tbody></table>';
+					$('#div_cuotas').html(tbl_cuotas);
+					
+
+					// Cargar información de la participación
+					var tabla = '<table id="tbl_resultados" class="table table-hover table-bordered table-striped table-sm texto-12" width="100%" cellspacing="0">'+
+						'<thead>'+
+						'<tr>'+
+						'<th>Nombre</th>'+
+						'<th>Apellido</th>'+
+						'<th>Porcentaje</th>'+
+						'</tr>'+
+						'</thead>'+
+						'<tbody>';
+
+					$.each(rta.datos.participacion, function(i, val){
+						tabla += '<tr>'+
+							'<td>'+val['inve_nombre']+'</td>'+
+							'<td>'+val['inve_apellido']+'</td>'+
+							'<td>'+val['prpa_porcentaje']+'</td>'+
+							'</tr>';
+					});
+
+					tabla += '</tbody></table>';
+					$('#div_participacion').html(tabla);
 				}
 			}
 		);
-	}
+	});
 </script>
 
 <? require '../../seguridad/seguridad/Menu.php'; ?>
 
-<div class="col-sm-12">
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-6">
-				<div class="card">
-					<div class="card-header bg-dark text-white">Información General</div>
-					<div class="card-body">
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6">
-				<div class="card">
-					<div class="card-header bg-dark text-white">Información Del Cliente</div>
-					<div class="card-body">
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6">
-				<div class="card">
-					<div class="card-header bg-dark text-white">Cuotas</div>
-					<div class="card-body">
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6">
-				<div class="card">
-					<div class="card-header bg-dark text-white">Participación</div>
-					<div class="card-body">
-					</div>
-				</div>
+<div class="row col-sm-12">
+	<div class="col-sm-4">
+		<div class="card">
+			<div class="card-header bg-dark text-white">Información del Préstamo</div>
+			<div class="card-body">
+				<table class="table table-sm texto-12">
+					<tr>
+						<th>Código</th>
+						<td class="text-right" id="lbl_pres_codigo"></td>
+					</tr>
+					<tr>
+						<th>Fecha</th>
+						<td class="text-right" id="lbl_pres_fecha"></td>
+					</tr>
+					<tr>
+						<th>Monto</th>
+						<td class="text-right" id="lbl_pres_vlr_monto"></td>
+					</tr>
+					<tr>
+						<th>Plazo (en meses)</th>
+						<td class="text-right" id="lbl_pres_plazo"></td>
+					</tr>
+					<tr>
+						<th>Porc. Interes</th>
+						<td class="text-right" id="lbl_pres_interes"></td>
+					</tr>
+					<tr>
+						<th>Total Intereses</th>
+						<td class="text-right" id="lbl_pres_int_total"></td>
+					</tr>
+				</table>
 			</div>
 		</div>
+	</div>
+	<div class="col-sm-4">
+		<div class="card">
+			<div class="card-header bg-dark text-white">Información del Cliente</div>
+			<div class="card-body">
+				<table class="table table-sm texto-12">
+					<tr>
+						<th>Nombre</th>
+						<td class="text-right" id="lbl_clie_nombre"></td>
+					</tr>
+					<tr>
+						<th>Apellido</th>
+						<td class="text-right" id="lbl_clie_apellido"></td>
+					</tr>
+					<tr>
+						<th>Correo</th>
+						<td class="text-right" id="lbl_clie_correo"></td>
+					</tr>
+					<tr>
+						<th>Celular</th>
+						<td class="text-right" id="lbl_clie_celular"></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-4">
+		<div class="card">
+			<div class="card-header bg-dark text-white">Participación</div>
+			<div class="card-body" id="div_participacion"></div>
+		</div>
+	</div>
+</div>
+<br>
+<div class="row col-sm-12">
+	<div class="col-sm-12">
+		<div class="card">
+			<div class="card-header bg-dark text-white">Cuotas</div>
+			<div class="card-body" id="div_cuotas"></div>
+		</div>
+	</div>
+</div>
+<br>
+<div class="row col-sm-12">
+	<div class="col-sm-12">
+	<a class="btn btn-danger btn-sm texto-12" href="../prestamos">Volver</a>
 	</div>
 </div>

@@ -2,6 +2,3 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/user/public_html/idcreativas.com/apps/SmartTrader/
-    - /bin/rm -Rf $DEPLOYPATH
-    - /bin/mkdir $DEPLOYPATH
-    - /bin/cp -R src/. $DEPLOYPATH

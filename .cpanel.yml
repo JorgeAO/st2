@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/user/public_html/idcreativas.com/apps/
+    - export DEPLOYPATH=/home/eintecsas/public_html/idcreativas.com/apps/
     - /bin/cp -R app $DEPLOYPATH

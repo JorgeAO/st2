@@ -87,17 +87,22 @@
 						" name="clie_apellido" id="clie_apellido" placeholder="Apellido" data-tipo="texto" data-req="true">
 						<label id="hlp_clie_apellido" class="texto-error"></label>
 					</div>
-					<div class="form-group col-sm-3">
+					<!--div class="form-group col-sm-3">
 						<label>Correo Electrónico</label>
 						<input type="text" class="form-control form-control-sm texto-12" name="clie_correo" id="clie_correo" placeholder="Correo Electrónico" data-tipo="correo" data-req="true">
 						<label id="hlp_clie_correo" class="texto-error"></label>
+					</div-->
+					<div class="form-group col-sm-3">
+						<label>Dirección</label>
+						<input type="text" class="form-control form-control-sm texto-12" name="clie_direccion" id="clie_direccion" placeholder="Dirección" data-tipo="alfanumerico" data-req="true">
+						<label id="hlp_clie_direccion" class="texto-error"></label>
 					</div>
 					<div class="form-group col-sm-3">
 						<label>Celular</label>
 						<input type="text" class="form-control form-control-sm texto-12" name="clie_celular" id="clie_celular" placeholder="Celular" data-tipo="numeros" data-req="true">
 						<label id="hlp_clie_celular" class="texto-error"></label>
 					</div>
-					<div class="form-group col-sm-3">
+					<!--div class="form-group col-sm-3">
 						<label>Nombre de Usuario</label>
 						<input type="text" class="form-control form-control-sm texto-12" name="usua_login" id="usua_login" placeholder="Nombre de Usuario" data-tipo="login" data-req="true">
 						<label id="hlp_usua_login" class="texto-error"></label>
@@ -111,7 +116,7 @@
 						<label>Repetir Clave</label>
 						<input type="password" class="form-control form-control-sm texto-12" name="repetir_clave" id="repetir_clave" placeholder="Repetir Clave" data-tipo="clave" data-req="true">
 						<label id="hlp_repetir_clave" class="texto-error"></label>
-					</div>
+					</div-->
 				</div>
 			</form>
 		</div>

@@ -9,7 +9,7 @@ class CtrlClientes extends Control
 	protected $intOpcion = 2003;
 	protected $strClase = 'ClsClientes';
 
-	public function insertar($arrParametros)
+	/*public function insertar($arrParametros)
 	{
 		try 
 		{
@@ -46,9 +46,9 @@ class CtrlClientes extends Control
 		{
 			throw new Exception($e->getMessage());
 		}
-	}
+	}*/
 
-	public function eliminar($arrParametros)
+	/*public function eliminar($arrParametros)
 	{
 		try 
 		{
@@ -76,5 +76,5 @@ class CtrlClientes extends Control
 		{
 			throw new Exception($e->getMessage());
 		}
-	}
+	}*/
 }

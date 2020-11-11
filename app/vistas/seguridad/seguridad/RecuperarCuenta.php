@@ -26,13 +26,13 @@
 
 <div class="col-sm-6 offset-sm-3 texto-12">
 	<div class="card">
-		<div class="card-header bg-base7 text-white">Recuperar Cuenta</div>
+		<div class="card-header bg-dark text-white">Recuperar Cuenta</div>
 		<div class="card-body">
 			<div class="col-sm-12">
 				<form id="frm_upd">
 					<div class="form-group">
 						<label>Usuario</label>
-						<input type="text" class="form-control form-control-sm" name="usua_login" id="usua_login" data-tipo="login" data-req="true">
+						<input type="text" class="form-control form-control-sm" name="usua_login" id="usua_login" data-tipo="correo" data-req="true">
 						<label id="hlp_usua_login" class="texto-error"></label>
 					</div>
 					<div class="form-group">

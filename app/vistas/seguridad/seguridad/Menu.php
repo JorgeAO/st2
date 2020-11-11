@@ -16,7 +16,9 @@
 
 <nav class="navbar navbar-dark navbar-expand-sm bg-dark">
 	<p>
-		<h5 class="text-white">Smart Trader</h5>
+		<h5 class="text-white">
+			<a href="../seguridad/principal"> Smart Trader </a>
+		</h5>
 	</p>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav_menu" aria-controls="nav_menu" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
@@ -27,7 +29,7 @@
 			<li class="nav-item dropdown dropleft">
 				<a class="nav-link dropdown-toggle" href="#" id="mod_user" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					​<picture>
-						<img src="/SmartTrader/recursos/imagenes/avatar2.png" class="rounded-circle" title="<?=$_SESSION['usuario_sesion'][0]['usua_nombre']?>" width="30">
+						<img src="/apps/SmartTrader/recursos/imagenes/avatar2.png" class="rounded-circle" title="<?=$_SESSION['usuario_sesion'][0]['usua_nombre']?>" width="30">
 					</picture>
 				</a>
 				<div class="dropdown-menu" aria-labelledby="mod_user">

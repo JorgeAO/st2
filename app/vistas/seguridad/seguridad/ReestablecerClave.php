@@ -1,10 +1,10 @@
-<script type="text/javascript" src="/base-v7/recursos/librerias/jquery/jquery-3.2.0.min.js"></script>
-<script type="text/javascript" src="/base-v7/recursos/librerias/propias/js/scripts.js"></script>
-<script type="text/javascript" src="/base-v7/recursos/librerias/propias/js/validador.js"></script>
-<script type="text/javascript" src="/base-v7/recursos/librerias/bootstrap/bootstrap-4.1.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/apps/SmartTrader/recursos/librerias/jquery/jquery-3.2.0.min.js"></script>
+<script type="text/javascript" src="/apps/SmartTrader/recursos/librerias/propias/js/scripts.js"></script>
+<script type="text/javascript" src="/apps/SmartTrader/recursos/librerias/propias/js/validador.js"></script>
+<script type="text/javascript" src="/apps/SmartTrader/recursos/librerias/bootstrap/bootstrap-4.1.2/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" type="text/css" href="/base-v7/recursos/librerias/bootstrap/bootstrap-4.1.2/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="/base-v7/recursos/librerias/propias/css/estilos.css">
+<link rel="stylesheet" type="text/css" href="/apps/SmartTrader/recursos/librerias/bootstrap/bootstrap-4.1.2/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/apps/SmartTrader/recursos/librerias/propias/css/estilos.css">
 
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -36,7 +36,7 @@
 
 <div class="col-sm-6 offset-sm-3 texto-12">
 	<div class="card">
-		<div class="card-header bg-base7 text-white">Reestablecer Clave</div>
+		<div class="card-header bg-dark text-white">Reestablecer Clave</div>
 		<div class="card-body">
 			<div class="col-sm-12">
 				<form id="frm_upd">

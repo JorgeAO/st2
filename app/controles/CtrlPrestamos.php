@@ -176,4 +176,17 @@ class CtrlPrestamos extends Control
 			throw new Exception('CtrlPrestamos.detalles: '.$e->getMessage());
 		}
 	}
+
+	public function pago($arrParametros = [])
+	{
+		try 
+		{
+			var_dump($arrParametros);
+			exit();
+		}
+		catch (Exception $e) 
+		{
+			throw new Exception('CtrlPrestamos.pago: '.$e->getMessage());
+		}
+	}
 }

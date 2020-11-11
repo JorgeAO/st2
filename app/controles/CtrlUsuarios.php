@@ -21,7 +21,7 @@ class CtrlUsuarios extends Control
 			
 			session_start();
 			$arrParametros['fc'] = date('Y-m-d H:m:s');
-			$arrParametros['uc'] = $_SESSION['usuarios_sesion'][0]['usua_codigo'];
+			$arrParametros['uc'] = $_SESSION['usuario_sesion'][0]['usua_codigo'];
 
 			ClsUsuarios::insertar($arrParametros);
 
@@ -96,7 +96,7 @@ class CtrlUsuarios extends Control
 		try 
 		{
 			$arrUsuario = ClsUsuarios::consultar([
-				'usua_login'=>$arrParametros['usua_login']
+				'usua_mail'=>$arrParametros['usua_login']
 			]);
 
 			if (count($arrUsuario) != 1)
@@ -117,7 +117,7 @@ class CtrlUsuarios extends Control
 			$strCorreo = "Hola ".$arrUsuario[0]['usua_nombre'].
 				"! <br><br>Usted ha solicitado recuperar su clave para ingresar al sistema.<br>".
 				"El siguiente enlace estará vigente durante los próximos 15 minutos para que pueda realizar el cambio de su clave.<br><br>".
-				"http://localhost/SmartTrader/seguridad/reestablecerClave/".$arrUsuario[0]['usua_codigo']."/".$strToken.".";
+				"http://idcreativas.com/apps/SmartTrader/seguridad/reestablecerClave/".$arrUsuario[0]['usua_codigo']."/".$strToken.".";
 
 			Generales::enviarMail($arrUsuario[0]['usua_mail'], 'Recuperación de Clave', utf8_decode($strCorreo));
 
@@ -152,7 +152,7 @@ class CtrlUsuarios extends Control
 				'usua_codigo' => $arrParametros['usua_codigo'],
 				'usua_clave' => md5($arrParametros['usua_clave']),
 				'usua_token' => '',
-				'usua_vcto_token' => ''
+				'usua_vcto_token' => date('Y-m-d H:i:s')
 			]);
 
 			$obRta->tipo = 'exito';
@@ -173,7 +173,7 @@ class CtrlUsuarios extends Control
 			session_destroy();
 
 			$obRta->tipo = 'exito';
-			$obRta->ruta = '/SmartTrader/';
+			$obRta->ruta = '/apps/SmartTrader/';
 			return $obRta;
 		} 
 		catch (Exception $e) 

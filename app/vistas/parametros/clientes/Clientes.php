@@ -1,13 +1,13 @@
-<script type="text/javascript" src="/SmartTrader/recursos/librerias/jquery/jquery-3.2.0.min.js"></script>
-<script type="text/javascript" src="/SmartTrader/recursos/librerias/propias/js/scripts.js"></script>
-<script type="text/javascript" src="/SmartTrader/recursos/librerias/bootstrap/bootstrap-4.1.2/js/bootstrap.min.js"></script>
-<script src="/SmartTrader/recursos/librerias/datatables/DataTables-1.10.16/js/jquery.dataTables.min.js"></script>
-<script src="/SmartTrader/recursos/librerias/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript" src="/apps/SmartTrader/recursos/librerias/jquery/jquery-3.2.0.min.js"></script>
+<script type="text/javascript" src="/apps/SmartTrader/recursos/librerias/propias/js/scripts.js"></script>
+<script type="text/javascript" src="/apps/SmartTrader/recursos/librerias/bootstrap/bootstrap-4.1.2/js/bootstrap.min.js"></script>
+<script src="/apps/SmartTrader/recursos/librerias/datatables/DataTables-1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="/apps/SmartTrader/recursos/librerias/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
 
-<link rel="stylesheet" type="text/css" href="/SmartTrader/recursos/librerias/bootstrap/bootstrap-4.1.2/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="/SmartTrader/recursos/librerias/fontawesome/font-awesome-4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="/SmartTrader/recursos/librerias/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.css">
-<link rel="stylesheet" type="text/css" href="/SmartTrader/recursos/librerias/propias/css/estilos.css">
+<link rel="stylesheet" type="text/css" href="/apps/SmartTrader/recursos/librerias/bootstrap/bootstrap-4.1.2/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/apps/SmartTrader/recursos/librerias/fontawesome/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/apps/SmartTrader/recursos/librerias/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.css">
+<link rel="stylesheet" type="text/css" href="/apps/SmartTrader/recursos/librerias/propias/css/estilos.css">
 
 <? require '../../seguridad/seguridad/Menu.php'; ?>
 
@@ -37,9 +37,7 @@
 						'<th>Identificación</th>'+
 						'<th>Nombre</th>'+
 						'<th>Apellido</th>'+
-						'<th>Correo</th>'+
 						'<th>Celular</th>'+
-						'<th>Usuario</th>'+
 						'<th>Estado</th>'+
 						'<th>Opciones</th>'+
 						'</tr>'+
@@ -53,9 +51,7 @@
 							'<td>'+val['clie_identificacion']+'</td>'+
 							'<td>'+val['clie_nombre']+'</td>'+
 							'<td>'+val['clie_apellido']+'</td>'+
-							'<td>'+val['clie_correo']+'</td>'+
 							'<td>'+val['clie_celular']+'</td>'+
-							'<td>'+val['usua_login']+'</td>'+
 							'<td>'+val['esta_descripcion']+'</td>'+
 							'<td class="btn-group">'+
 							'<a href="clientesDet/'+val['clie_codigo']+'" class="btn btn-primary btn-sm" title="Detalles"><i class="fa fa-info"></i></a>'+

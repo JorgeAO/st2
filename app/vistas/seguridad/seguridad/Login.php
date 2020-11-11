@@ -29,7 +29,7 @@
 
 <div class="col-sm-6 offset-sm-3">
 	<div class="card">
-		<div class="card-header text-white bg-dark">Iniciar Sesión</div>
+		<div class="card-header text-white bg-dark">Smart Trader | Iniciar Sesión</div>
 		<div class="card-body">
 			<div class="col-sm-12">
 				<form id="frm_src">
@@ -54,5 +54,5 @@
 </div>
 <div class="col-sm-12 text-center">
 	<span class="texto-12">Desarrollado por:<br></span>
-	<img width="100px" src="/base-v7/recursos/imagenes/aming_logo.png">
+	<img width="100px" src="/apps/SmartTrader/recursos/imagenes/aming_logo.png">
 </div>

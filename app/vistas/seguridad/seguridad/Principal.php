@@ -26,7 +26,7 @@
 
 <link rel="stylesheet" type="text/css" href="../recursos/librerias/bootstrap/bootstrap-4.1.2/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../recursos/librerias/propias/css/estilos.css">
-<link rel="stylesheet" type="text/css" href="/SmartTrader/recursos/librerias/fontawesome/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="/apps/SmartTrader/recursos/librerias/fontawesome/font-awesome-4.7.0/css/font-awesome.min.css">
 
 <? require 'Menu.php'; ?>
 

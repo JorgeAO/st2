@@ -1,0 +1,3 @@
+[11-Sep-2020 00:34:50 UTC] PHP Notice:  Undefined index: usuario_sesion in /home/eintecsas/public_html/idcreativas.com/apps/SmartTrader/app/vistas/seguridad/seguridad/Menu.php on line 30
+[11-Sep-2020 00:34:50 UTC] PHP Notice:  Undefined index: usuario_sesion in /home/eintecsas/public_html/idcreativas.com/apps/SmartTrader/app/vistas/seguridad/seguridad/Menu.php on line 35
+[11-Sep-2020 00:34:50 UTC] PHP Notice:  Undefined index: usuario_sesion in /home/eintecsas/public_html/idcreativas.com/apps/SmartTrader/app/vistas/seguridad/seguridad/Menu.php on line 36

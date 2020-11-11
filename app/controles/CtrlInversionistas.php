@@ -17,7 +17,7 @@ class CtrlInversionistas extends Control
 			if (!ClsPermisos::blValidarPermiso($this->intOpcion, 'c'))
 				throw new Exception('Usted no posee permisos para ejecutar esta acción');
 
-			$arrUsuario = ClsUsuarios::insertar([
+			/*$arrUsuario = ClsUsuarios::insertar([
 				'usua_nombre' => $arrParametros['inve_nombre'].' '.$arrParametros['inve_apellido'],
 				'usua_mail' => $arrParametros['inve_correo'],
 				'usua_login' => $arrParametros['usua_login'],
@@ -25,7 +25,7 @@ class CtrlInversionistas extends Control
 				'fk_seg_perfiles' => '7',
 				'fc' => date('Y-m-d H:m:s'),
 				'uc' => $_SESSION['usuario_sesion'][0]['usua_codigo']
-			]);
+			]);*/
 
 			unset(
 				$arrParametros['usua_login'],
@@ -33,7 +33,7 @@ class CtrlInversionistas extends Control
 				$arrParametros['repetir_clave']
 			);
 
-			$arrParametros['fk_seg_usuarios'] = $arrUsuario['insert_id'];
+			//$arrParametros['fk_seg_usuarios'] = $arrUsuario['insert_id'];
 			$arrParametros['fc'] = date('Y-m-d H:m:s');
 			$arrParametros['uc'] = $_SESSION['usuario_sesion'][0]['usua_codigo'];
 
@@ -62,7 +62,7 @@ class CtrlInversionistas extends Control
 		}
 	}
 
-	public function eliminar($arrParametros)
+	/*public function eliminar($arrParametros)
 	{
 		try 
 		{
@@ -90,5 +90,5 @@ class CtrlInversionistas extends Control
 		{
 			throw new Exception($e->getMessage());
 		}
-	}
+	}*/
 }

@@ -1,6 +1,0 @@
-[10-Sep-2020 17:41:03 America/Bogota] PHP Notice:  Undefined index: usuario_sesion in /home/eintecsas/public_html/idcreativas.com/apps/SmartTrader/app/vistas/seguridad/seguridad/Menu.php on line 30
-[10-Sep-2020 17:41:03 America/Bogota] PHP Notice:  Undefined index: usuario_sesion in /home/eintecsas/public_html/idcreativas.com/apps/SmartTrader/app/vistas/seguridad/seguridad/Menu.php on line 35
-[10-Sep-2020 17:41:03 America/Bogota] PHP Notice:  Undefined index: usuario_sesion in /home/eintecsas/public_html/idcreativas.com/apps/SmartTrader/app/vistas/seguridad/seguridad/Menu.php on line 36
-[10-Sep-2020 19:37:18 America/Bogota] PHP Notice:  Undefined index: usuario_sesion in /home/eintecsas/public_html/idcreativas.com/apps/SmartTrader/app/vistas/seguridad/seguridad/Menu.php on line 30
-[10-Sep-2020 19:37:18 America/Bogota] PHP Notice:  Undefined index: usuario_sesion in /home/eintecsas/public_html/idcreativas.com/apps/SmartTrader/app/vistas/seguridad/seguridad/Menu.php on line 35
-[10-Sep-2020 19:37:18 America/Bogota] PHP Notice:  Undefined index: usuario_sesion in /home/eintecsas/public_html/idcreativas.com/apps/SmartTrader/app/vistas/seguridad/seguridad/Menu.php on line 36

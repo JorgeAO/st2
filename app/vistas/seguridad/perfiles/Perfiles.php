@@ -11,12 +11,6 @@
 
 <? require '../seguridad/Menu.php'; ?>
 
-<?
-echo "<pre>";
-print_r($_SESSION);
-echo "</pre>";
-?>
-
 <script type="text/javascript">
 	$(document).ready(function(){
 		consultar();

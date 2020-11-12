@@ -1,6 +1,6 @@
 <?
 
-include_once '../app/modelos/ClsPerfiles.php';
+//include_once '../app/modelos/ClsPerfiles.php';
 include_once '../nucleo/Control.php';
 
 class CtrlPerfiles extends Control

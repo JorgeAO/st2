@@ -29,7 +29,7 @@
 
 <div class="col-sm-6 offset-sm-3">
 	<div class="card">
-		<div class="card-header text-white bg-dark">Smart Trader | Iniciar Sesión | GIT</div>
+		<div class="card-header text-white bg-dark text-center">Iniciar Sesión</div>
 		<div class="card-body">
 			<div class="col-sm-12">
 				<form id="frm_src">
@@ -47,7 +47,7 @@
 			</div>
 		</div>
 		<div class="card-footer">
-			<button class="btn btn-success btn-sm" id="btn_entrar">Entrar</button>
+			<button class="btn btn-primary btn-sm" id="btn_entrar">Entrar</button>
 			<a href="recuperarCuenta" class="btn btn-outline-primary btn-sm">Olvidé mi contraseña</a>
 		</div>
 	</div>

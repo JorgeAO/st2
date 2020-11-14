@@ -14,118 +14,6 @@
 <link rel="stylesheet" href="/apps/SmartTrader/recursos/librerias/select2/css/select2.min.css">
 <link rel="stylesheet" href="/apps/SmartTrader/recursos/librerias/datepicker/bootstrap-datepicker-1.9.0/css/bootstrap-datepicker.min.css">
 
-<script type="text/javascript">
-	$(document).ready(function(){
-
-		$('#pago_fecha').datepicker({
-			format: "yyyy-mm-dd",
-			todayBtn: "linked",
-			language: "es"
-		});
-
-		enviarPeticion(
-			'prestamos/detalles',
-			{
-				'pres_codigo':<?=$_REQUEST['cod']?>
-			}, 
-			function(rta){
-				if (rta.tipo == 'exito')
-				{
-					// Cargar información del préstamo y del cliente
-					$.each(rta.datos.prestamo[0], function(i, val){
-						$('#lbl_'+i).html(val);
-					});
-
-					// Cargar información de la participación
-					var tbl_participacion = '<table id="tbl_resultados" class="table table-hover table-bordered table-striped table-sm texto-12" width="100%" cellspacing="0">'+
-						'<thead>'+
-						'<tr>'+
-						'<th>Nombre</th>'+
-						'<th>Apellido</th>'+
-						'<th>Porcentaje</th>'+
-						'</tr>'+
-						'</thead>'+
-						'<tbody>';
-
-					$.each(rta.datos.participacion, function(i, val){
-						tbl_participacion += '<tr>'+
-							'<td>'+val['inve_nombre']+'</td>'+
-							'<td>'+val['inve_apellido']+'</td>'+
-							'<td>'+val['prpa_porcentaje']+'</td>'+
-							'</tr>';
-					});
-					tbl_participacion += '</tbody></table>';
-					$('#div_participacion').html(tbl_participacion);
-
-					// Cargar información de las cuotas
-					var tbl_cuotas = '<table id="tbl_resultados" class="table table-hover table-bordered table-striped table-sm texto-12" width="100%" cellspacing="0">'+
-						'<thead>'+
-						'<tr>'+
-						'<th>Préstamo</th>'+
-						'<th>Cuota</th>'+
-						'<th>Fecha</th>'+
-						'<th>Valor</th>'+
-						'<th>Estado</th>'+
-						'<th>Fecha Pago</th>'+
-						'<th>Valor Pago</th>'+
-						'<th>Opciones</th>'+
-						'</tr>'+
-						'</thead>'+
-						'<tbody>';
-
-					$.each(rta.datos.cuotas, function(i, val){
-						tbl_cuotas += '<tr>'+
-							'<td>'+val['fk_pre_prestamos']+'</td>'+
-							'<td>'+val['prcu_codigo']+'</td>'+
-							'<td>'+val['prcu_fecha']+'</td>'+
-							'<td>'+val['prcu_valor']+'</td>'+
-							'<td>'+val['esta_descripcion']+'</td>'+
-							'<td>'+val['prcu_valor_pago']+'</td>'+
-							'<td>'+val['prcu_fecha_pago']+'</td>'+
-							'<td>'+
-							'<button class="btn btn-success btn-sm" type="button" title="Registrar pago" onclick="registrarPago('+val['prcu_codigo']+')"><i class="fa fa-usd"></i></button>'+
-							'</td>'+
-							'</tr>';
-					});
-
-					tbl_cuotas += '</tbody></table>';
-					$('#div_cuotas').html(tbl_cuotas);
-				}
-			}
-		);
-
-		$('.pago_tipo').on('click', function(){
-			$('#pago_vlr').val('');
-			if (this.value == 'D')
-				$('#pago_vlr').attr('readonly', false);
-			else
-				$('#pago_vlr').attr('readonly', true)
-		});
-
-		$('#btn_aceptar').on('click', function(){
-			console.info($('#pago_tipo').val);
-			enviarPeticion(
-				'prestamos/pago',
-				{
-					'cuota':$('#pago_cuota').val(),
-					'tipo':$('#pago_tipo').val(),
-					'valor':$('pago_vlr').val(),
-					'fecha':$('#pago_fecha').val()
-				}, 
-				function(rta){
-					console.info(rta);
-				}
-			);
-		});
-	});
-
-	function registrarPago(cod)
-	{
-		$('#pago_cuota').val(cod);
-		$('#mdl_pago').modal('show');
-	}
-</script>
-
 <? require '../../seguridad/seguridad/Menu.php'; ?>
 
 <div class="row col-sm-12">
@@ -270,3 +158,113 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		$('#pago_fecha').datepicker({
+			format: "yyyy-mm-dd",
+			todayBtn: "linked",
+			language: "es"
+		});
+
+		enviarPeticion(
+			'prestamos/detalles',
+			{
+				'pres_codigo':<?=$_REQUEST['cod']?>
+			}, 
+			function(rta){
+				if (rta.tipo == 'exito')
+				{
+					// Cargar información del préstamo y del cliente
+					$.each(rta.datos.prestamo[0], function(i, val){
+						$('#lbl_'+i).html(val);
+					});
+
+					// Cargar información de la participación
+					var tbl_participacion = '<table id="tbl_resultados" class="table table-hover table-bordered table-striped table-sm texto-12" width="100%" cellspacing="0">'+
+						'<thead>'+
+						'<tr>'+
+						'<th>Nombre</th>'+
+						'<th>Apellido</th>'+
+						'<th>Porcentaje</th>'+
+						'</tr>'+
+						'</thead>'+
+						'<tbody>';
+
+					$.each(rta.datos.participacion, function(i, val){
+						tbl_participacion += '<tr>'+
+							'<td>'+val['inve_nombre']+'</td>'+
+							'<td>'+val['inve_apellido']+'</td>'+
+							'<td>'+val['prpa_porcentaje']+'</td>'+
+							'</tr>';
+					});
+					tbl_participacion += '</tbody></table>';
+					$('#div_participacion').html(tbl_participacion);
+
+					// Cargar información de las cuotas
+					var tbl_cuotas = '<table id="tbl_resultados" class="table table-hover table-bordered table-striped table-sm texto-12" width="100%" cellspacing="0">'+
+						'<thead>'+
+						'<tr>'+
+						'<th>Cuota</th>'+
+						'<th>Fecha</th>'+
+						'<th>Valor</th>'+
+						'<th>Estado</th>'+
+						'<th>Fecha Pago</th>'+
+						'<th>Valor Pago</th>'+
+						'<th>Opciones</th>'+
+						'</tr>'+
+						'</thead>'+
+						'<tbody>';
+
+					$.each(rta.datos.cuotas, function(i, val){
+						tbl_cuotas += '<tr>'+
+							'<td>'+val['prcu_numero']+'</td>'+
+							'<td>'+val['prcu_fecha']+'</td>'+
+							'<td>'+val['prcu_valor']+'</td>'+
+							'<td>'+val['esta_descripcion']+'</td>'+
+							'<td>'+val['prcu_valor_pago']+'</td>'+
+							'<td>'+val['prcu_fecha_pago']+'</td>'+
+							'<td>'+
+							'<button class="btn btn-success btn-sm" type="button" title="Registrar pago" onclick="registrarPago('+val['prcu_codigo']+')"><i class="fa fa-usd"></i></button>'+
+							'</td>'+
+							'</tr>';
+					});
+
+					tbl_cuotas += '</tbody></table>';
+					$('#div_cuotas').html(tbl_cuotas);
+				}
+			}
+		);
+
+		$('.pago_tipo').on('click', function(){
+			$('#pago_vlr').val('');
+			if (this.value == 'D')
+				$('#pago_vlr').attr('readonly', false);
+			else
+				$('#pago_vlr').attr('readonly', true)
+		});
+
+		$('#btn_aceptar').on('click', function(){
+			console.info($('#pago_tipo').val);
+			enviarPeticion(
+				'prestamos/pago',
+				{
+					'cuota':$('#pago_cuota').val(),
+					'tipo':$('#pago_tipo').val(),
+					'valor':$('pago_vlr').val(),
+					'fecha':$('#pago_fecha').val()
+				}, 
+				function(rta){
+					console.info(rta);
+				}
+			);
+		});
+	});
+
+	function registrarPago(cod)
+	{
+		$('#pago_cuota').val(cod);
+		$('#mdl_pago').modal('show');
+	}
+</script>

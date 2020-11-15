@@ -100,10 +100,6 @@
 	</div>
 </div>
 
-<div class="row" id="div_alert">
-	<div class="alert alert-danger" id="div_mensaje" role="alert"></div>
-</div>
-
 <script type="text/javascript">
 	$(document).ready(function(){
 

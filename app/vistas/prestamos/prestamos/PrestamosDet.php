@@ -46,6 +46,14 @@
 						<th>Total Intereses</th>
 						<td class="text-right" id="lbl_pres_int_total"></td>
 					</tr>
+					<tr>
+						<th>Total a Pagar</th>
+						<td class="text-right" id="lbl_pres_vlr_pago"></td>
+					</tr>
+					<tr>
+						<th>Saldo Pendiente</th>
+						<td class="text-right" id="lbl_pres_vlr_saldo"></td>
+					</tr>
 				</table>
 			</div>
 		</div>
@@ -109,45 +117,40 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<div class="form-group col-sm-3">
-						<label>Cuota</label>
-						<input type="text" class="form-control form-control-sm validar" name="pago_cuota" id="pago_cuota" data-tipo="numeros" data-req="true" placeholder="Cuota" readonly="true">
-					</div>
-					<div class="form-group col-sm-3">
-						<p>Valor a pagar</p>
-						<div class="form-check">
-							<input class="form-check-input pago_tipo" type="radio" name="pago_tipo" id="pago_cuota" value="T" checked>
-							<label class="form-check-label">
-								Todo
-							</label>
+					<div class="col-sm-3">
+						<div class="form-group col-sm-12">
+							<label class="font-weight-bold">Cuota:</label>
+							<p id="pc_prcu_codigo"></p>
 						</div>
-						<div class="form-check">
-							<input class="form-check-input pago_tipo" type="radio" name="pago_tipo" id="pago_cuota" value="C">
-							<label class="form-check-label">
-								Valor de la cuota
-							</label>
+						<div class="form-group col-sm-12">
+							<label class="font-weight-bold">Valor de la Cuota:</label>
+							<p id="pc_prcu_valor"></p>
 						</div>
-						<div class="form-check">
-							<input class="form-check-input pago_tipo" type="radio" name="pago_tipo" id="pago_cuota" value="D">
-							<label class="form-check-label">
-								Valor diferente
-							</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input pago_tipo" type="radio" name="pago_tipo" id="pago_cuota" value="N">
-							<label class="form-check-label">
-								No paga
-							</label>
+						<div class="form-group col-sm-12">
+							<label class="font-weight-bold">Saldo de la Deuda:</label>
+							<p id="pc_pres_vlr_saldo"></p>
 						</div>
 					</div>
-					<div class="form-group col-sm-3">
-						<label>Valor a pagar</label>
-						<input type="text" class="form-control form-control-sm validar" name="pago_vlr" id="pago_vlr" data-tipo="numeros" data-req="true" placeholder="Valor a pagar" readonly="true">
-					</div>
-					<div class="form-group col-sm-3">
-						<label>Fecha</label>
-						<input type="text" class="form-control form-control-sm validar" name="pago_fecha" id="pago_fecha" data-tipo="direccion" data-req="true" placeholder="Fecha" readonly="true">
-						<label id="hlp_pago_fecha" class="texto-error"></label>
+					<div class="row col-sm-9">
+						<div class="form-group col-sm-4">
+							<label>Fecha</label>
+							<input type="text" class="form-control form-control-sm validar" name="pc_pago_fecha" id="pc_pago_fecha" data-tipo="direccion" data-req="true" placeholder="Fecha" readonly="true">
+							<label id="hlp_pc_pago_fecha" class="texto-error"></label>
+						</div>
+						<div class="form-group col-sm-4">
+							<label>Pago</label>
+							<select class="form-control form-control-sm texto-12 intCalcular validar enviar" name="pc_tipo_pago" id="pc_tipo_pago" data-req="true">
+								<option value="C">Cuota</option>
+								<option value="D">Valor diferente</option>
+								<option value="T">Todo</option>
+								<option value="N">No paga</option>
+							</select>
+						</div>
+						<div class="form-group col-sm-4">
+							<label>Valor a pagar</label>
+							<input type="text" class="form-control form-control-sm validar" name="pc_vlr_pago" id="pc_vlr_pago" data-tipo="numeros" data-req="true" placeholder="Valor a pagar" readonly="true">
+							<label id="hlp_pc_vlr_pago" class="texto-error"></label>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -162,7 +165,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 
-		$('#pago_fecha').datepicker({
+		$('#pc_pago_fecha').datepicker({
 			format: "yyyy-mm-dd",
 			todayBtn: "linked",
 			language: "es"
@@ -218,15 +221,21 @@
 						'<tbody>';
 
 					$.each(rta.datos.cuotas, function(i, val){
+						let estado;
+						if (val['fk_par_estados'] == 3)
+							estado = 'primary';
+						else if (val['fk_par_estados'] == 4)
+							estado = 'success';
+
 						tbl_cuotas += '<tr>'+
 							'<td>'+val['prcu_numero']+'</td>'+
 							'<td>'+val['prcu_fecha']+'</td>'+
 							'<td>'+val['prcu_valor']+'</td>'+
-							'<td>'+val['esta_descripcion']+'</td>'+
-							'<td>'+val['prcu_valor_pago']+'</td>'+
+							'<td><span class="badge badge-'+estado+'">'+val['esta_descripcion']+'</span></td>'+
 							'<td>'+val['prcu_fecha_pago']+'</td>'+
+							'<td>'+val['prcu_valor_pago']+'</td>'+
 							'<td>'+
-							'<button class="btn btn-success btn-sm" type="button" title="Registrar pago" onclick="registrarPago('+val['prcu_codigo']+')"><i class="fa fa-usd"></i></button>'+
+							'<button class="btn btn-success btn-sm" type="button" title="Registrar pago" onclick="registrarPago('+val['prcu_codigo']+', '+val['prcu_valor']+', '+rta.datos.prestamo[0]['pres_vlr_saldo']+')"><i class="fa fa-usd"></i></button>'+
 							'</td>'+
 							'</tr>';
 					});
@@ -237,34 +246,52 @@
 			}
 		);
 
-		$('.pago_tipo').on('click', function(){
-			$('#pago_vlr').val('');
-			if (this.value == 'D')
-				$('#pago_vlr').attr('readonly', false);
+		$('#pc_tipo_pago').on('change', function(){
+			$('#pc_vlr_pago').val('');
+			if ($('#pc_tipo_pago').val() == 'D')
+				$('#pc_vlr_pago').attr('readonly', false);
 			else
-				$('#pago_vlr').attr('readonly', true)
+				$('#pc_vlr_pago').attr('readonly', true)
 		});
 
 		$('#btn_aceptar').on('click', function(){
-			console.info($('#pago_tipo').val);
-			enviarPeticion(
-				'prestamos/pago',
-				{
-					'cuota':$('#pago_cuota').val(),
-					'tipo':$('#pago_tipo').val(),
-					'valor':$('pago_vlr').val(),
-					'fecha':$('#pago_fecha').val()
-				}, 
-				function(rta){
-					console.info(rta);
-				}
-			);
+			let valido = true;
+
+			valido = validarCampo('pc_pago_fecha');
+
+			if (valido == true)
+			{
+				if ($('#pc_tipo_pago').val() == 'D')
+					valido = validarCampo('pc_vlr_pago');
+			}
+
+			if (valido == true)
+			{
+				enviarPeticion(
+					'prestamos/pago',
+					{
+						'cuota':$('#pc_prcu_codigo')[0].innerText,
+						'vlr_cuota':$('#pc_prcu_valor')[0].innerText,
+						'saldo':$('#pc_pres_vlr_saldo')[0].innerText,
+						'fecha':$('#pc_pago_fecha').val(),
+						'tipo':$('#pc_tipo_pago').val(),
+						'valor':$('#pc_vlr_pago').val(),
+					}, 
+					function(rta){
+						alert(rta.mensaje);
+						if (rta.tipo == 'exito')
+							location.reload();
+					}
+				);
+			}
 		});
 	});
 
-	function registrarPago(cod)
+	function registrarPago(cod, vlrCuota, vlrSaldo)
 	{
-		$('#pago_cuota').val(cod);
+		$('#pc_prcu_codigo').html(cod);
+		$('#pc_prcu_valor').html(vlrCuota);
+		$('#pc_pres_vlr_saldo').html(vlrSaldo);
 		$('#mdl_pago').modal('show');
 	}
 </script>

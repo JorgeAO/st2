@@ -104,6 +104,7 @@ class CtrlPrestamos extends Control
 				'pres_int_mensual' => $arrParametros['pres_int_mensual'],
 				'pres_int_total' => $arrParametros['pres_int_total'],
 				'pres_vlr_pago' => $arrParametros['pres_vlr_pago'],
+				'pres_vlr_saldo' => $arrParametros['pres_vlr_pago'],
 				'pres_vlr_cuota' => $arrParametros['pres_vlr_cuota'],
 				'fc' => date('Y-m-d H:m:s'),
 				'uc' => $_SESSION['usuario_sesion'][0]['usua_codigo']
@@ -127,7 +128,7 @@ class CtrlPrestamos extends Control
 					'fk_pre_prestamos' => $arrPrestamo['insert_id'],
 					'prcu_numero' => $i,
 					'prcu_fecha' => date('Y-m-d', strtotime('+'.$strFrecuencia, strtotime($arrParametros['pres_fecha']))),
-					'prcu_valor' => $arrParametros['pres_vlr_cuota']
+					'prcu_valor' => $arrParametros['pres_vlr_cuota'],
 				]);
 			}
 
@@ -163,9 +164,6 @@ class CtrlPrestamos extends Control
 			$objRta->tipo = 'exito';
 			$objRta->mensaje = 'El proceso se realizó con éxito';
 			return $objRta;
-
-			print_r($arrParametros);
-			exit();
 		} 
 		catch (Exception $e) 
 		{
@@ -209,8 +207,77 @@ class CtrlPrestamos extends Control
 	{
 		try 
 		{
-			var_dump($arrParametros);
-			exit();
+			$flValorPago = 0; // Se inicia el pago en cero
+			$intEstadoCuota = 3; // Se inicia el estado de la cuota como pendiente
+
+			// Si el cliente está pagando la cuota
+			if ($arrParametros['tipo'] == 'C')
+			{
+				$flValorPago = $arrParametros['vlr_cuota'];
+				$intEstadoCuota = 4; // Estado 4: Pagada
+			}
+
+
+			// Registrar el pago de la cuota ----------------------------------
+			ClsCuotas::editar([
+				'prcu_codigo' => $arrParametros['cuota'],
+				'prcu_fecha_pago' => $arrParametros['fecha'],
+				'prcu_valor_pago' => $flValorPago,
+				'fk_par_estados' => $intEstadoCuota, 
+			]);
+			// ----------------------------------------------------------------
+			
+
+			// Obtener el código del préstamo----------------------------------
+			$arrCuota = ClsCuotas::consultar([
+				'prcu_codigo' => $arrParametros['cuota'],
+			]);
+			// ----------------------------------------------------------------
+			
+			
+			// Obtener la participación de los inversionisas ------------------
+			$arrParticipacion = ClsParticipacion::consultar([
+				'fk_pre_prestamos' => $arrCuota[0]['fk_pre_prestamos'],
+			]);
+			// ----------------------------------------------------------------
+			
+			
+			// Distribuir ingreso entre los inversionistas --------------------
+			// Recorrer los inversionistas que participaron en el préstamo
+			foreach ($arrParticipacion as $arrPrestamita)
+			{
+				// Calcular el valor ganado en la cuota por el inversionista de acuerdo al 
+				// porcentaje de participación
+				// Valor Ganado = ( Valor Pagado / % Participacion ) * 100
+				$flValorGanado = ($flValorPago / $arrPrestamita['prpa_porcentaje']) * 100;
+
+				// Consultar la información del inversionista
+				$arrInversionista = ClsInversionistas::consultar([
+					'inve_codigo' => $arrPrestamita['fk_par_inversionistas']
+				]);
+
+				// Sumar el valor ganado por el inversionista a su saldo
+				ClsInversionistas::editar([
+					'inve_codigo' => $arrPrestamita['fk_par_inversionistas'],
+					'inve_saldo' => $arrInversionista[0]['inve_saldo'] + $flValorGanado,
+				]);
+				
+				// Insertar movimiento de caja ------------------------------------
+				ClsMovimientos::insertar([
+					'fk_par_inversionistas' => $arrPrestamita['fk_par_inversionistas'],
+					'movi_tipo' => 'E',
+					'movi_descripcion' => 'Pago de la cuota # '.$arrCuota[0]['prcu_numero'].' del prestamo # '.$arrCuota[0]['fk_pre_prestamos'],
+					'movi_fecha' => $arrParametros['fecha'],
+					'movi_monto' => $flValorGanado,
+					'fc' => date('Y-m-d H:m:s'),
+					'uc' => $_SESSION['usuario_sesion'][0]['usua_codigo']
+				]);
+			}
+			// ----------------------------------------------------------------
+			
+			$objRta->tipo = 'exito';
+			$objRta->mensaje = 'El proceso se realizó con éxito';
+			return $objRta;
 		}
 		catch (Exception $e) 
 		{

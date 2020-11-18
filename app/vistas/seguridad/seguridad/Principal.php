@@ -41,7 +41,12 @@
 	</div>
 	<div class="col-sm-3">
 		<div class="card bg-primary text-white p-3">
-			<p style="font-size:14px"><i class="fa fa-handshake-o"></i> Préstamos</p>
+			<p style="font-size:14px">
+				<i class="fa fa-handshake-o"></i> Préstamos
+				<a class="btn btn-primary btn-sm pull-right text-white" title="Agregar préstamo" href="../prestamos/prestamosAdd" style="font-size:14px">
+					<i class="fa fa-plus"></i>
+				</a>
+			</p>
 			<h2 class="text-right" id="card_prestamos"></h2>
 		</div>
 	</div>

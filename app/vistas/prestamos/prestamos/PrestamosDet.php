@@ -230,12 +230,12 @@
 						tbl_cuotas += '<tr>'+
 							'<td>'+val['prcu_numero']+'</td>'+
 							'<td>'+val['prcu_fecha']+'</td>'+
-							'<td>'+val['prcu_valor']+'</td>'+
+							'<td>'+val['prcu_vlr_saldo']+'</td>'+
 							'<td><span class="badge badge-'+estado+'">'+val['esta_descripcion']+'</span></td>'+
 							'<td>'+val['prcu_fecha_pago']+'</td>'+
 							'<td>'+val['prcu_valor_pago']+'</td>'+
 							'<td>'+
-							'<button class="btn btn-success btn-sm" type="button" title="Registrar pago" onclick="registrarPago('+val['prcu_codigo']+', '+val['prcu_valor']+', '+rta.datos.prestamo[0]['pres_vlr_saldo']+')"><i class="fa fa-usd"></i></button>'+
+							'<button class="btn btn-success btn-sm" type="button" title="Registrar pago" onclick="registrarPago('+val['prcu_codigo']+', '+val['prcu_vlr_saldo']+', '+rta.datos.prestamo[0]['pres_vlr_saldo']+')"><i class="fa fa-usd"></i></button>'+
 							'</td>'+
 							'</tr>';
 					});

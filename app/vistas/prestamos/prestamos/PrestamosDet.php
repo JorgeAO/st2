@@ -271,8 +271,6 @@
 				$('#btn_aceptar').attr("disabled", true);
 				$('#div_mensaje').html('<i class="fa fa-spinner fa-pulse fa-fw"></i> Procesando pago, un momento por favor');
 
-				setTimeout(function(){
-				}, 5000);
 				enviarPeticion(
 					'prestamos/pago',
 					{

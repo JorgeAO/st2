@@ -155,6 +155,7 @@
 				</div>
 			</div>
 			<div class="modal-footer">
+				<div id="div_mensaje" class="pull-left"></div>
 				<button class="btn btn-success btn-sm texto-12" id="btn_aceptar">Aceptar</button>
         		<button type="button" class="btn btn-danger btn-sm texto-12" data-dismiss="modal">Cancelar</button>
 			</div>
@@ -267,6 +268,11 @@
 
 			if (valido == true)
 			{
+				$('#btn_aceptar').attr("disabled", true);
+				$('#div_mensaje').html('<i class="fa fa-spinner fa-pulse fa-fw"></i> Procesando pago, un momento por favor');
+
+				setTimeout(function(){
+				}, 5000);
 				enviarPeticion(
 					'prestamos/pago',
 					{
@@ -279,6 +285,10 @@
 					}, 
 					function(rta){
 						alert(rta.mensaje);
+
+						$('#div_mensaje').html('');
+						$('#btn_aceptar').attr("disabled", false);
+						
 						if (rta.tipo == 'exito')
 							location.reload();
 					}

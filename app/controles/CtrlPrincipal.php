@@ -28,7 +28,7 @@ class CtrlPrincipal
             $arrInversionistas = $clsInversionistas->consultar([ 'inve.fk_par_estados' => 1 ]);
 
             // Consultar cuánto se debe recoger hoy
-            $arrTotalHoy = BaseDatos::ejecutarSentencia("select coalesce(sum(prcu_vlr_saldo), 0) as total_hoy from tb_pre_cuotas where prcu_fecha = '".$arrParametros['fecha']."'");
+            $arrTotalHoy = BaseDatos::ejecutarSentencia("select coalesce(sum(prcu_vlr_saldo), 0) as total_hoy from tb_pre_cuotas where prcu_fecha = '".$arrParametros['fecha']."' and fk_par_estados not in (6)");
 
             // Consultar cuánto se ha recogido hoy
             $arrTotalRecogido = BaseDatos::ejecutarSentencia("select coalesce(sum(prcu_vlr_saldo), 0) as total_recogido from tb_pre_cuotas where fk_par_estados = 4 and prcu_fecha = '".$arrParametros['fecha']."'");

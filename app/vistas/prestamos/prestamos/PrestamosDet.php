@@ -229,6 +229,8 @@
 							estado = 'success';
 						else if (val['fk_par_estados'] == 5)
 							estado = 'danger';
+						else if (val['fk_par_estados'] == 6)
+							estado = 'secondary';
 
 						tbl_cuotas += '<tr>'+
 							'<td>'+val['prcu_numero']+'</td>'+

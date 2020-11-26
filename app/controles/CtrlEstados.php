@@ -7,11 +7,10 @@ class CtrlEstados extends Control
 {
 	protected $strClase = 'ClsEstados';
 
-	/*public function listar($arrParametros = [])
+	public function listar($arrParametros = [])
 	{
 		try 
 		{
-			include_once '../../app/modelos/'.$this->strClase.'.php';
 			$clase = new $this->strClase();
 			$arrResultados = $clase::consultar($arrParametros);
 
@@ -23,5 +22,5 @@ class CtrlEstados extends Control
 		{
 			throw new Exception($e->getMessage());
 		}
-	}*/
+	}
 }

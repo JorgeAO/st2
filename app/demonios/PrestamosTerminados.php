@@ -27,8 +27,7 @@ try
     $arrCuotas = BaseDatos::ejecutarSentencia($sqlCuotas);
     
     foreach ($arrCuotas as $arrCuota)
-        echo "update tb_pre_prestamos set fk_par_estados = 7 where pres_codigo = ".$arrCuota['fk_pre_prestamos'].";<br>";
-        //BaseDatos::ejecutarSentencia("update tb_pre_prestamos set fk_par_estados = 7 where pres_codigo = ".$arrCuota['fk_pre_prestamos'].";");
+        BaseDatos::ejecutarSentencia("update tb_pre_prestamos set fk_par_estados = 7 where pres_codigo = ".$arrCuota['fk_pre_prestamos'].";");
 } 
 catch (Execption $e)
 {

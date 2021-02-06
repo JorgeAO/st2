@@ -117,7 +117,9 @@ class CtrlPrestamos extends Control
 			for ($i = 1; $i <= $arrParametros['pres_nro_cuotas']; $i++)
 			{
 				$strFrecuencia = '';
-				if ($arrParametros['pres_frecuencia'] == 'S')
+				if ($arrParametros['pres_frecuencia'] == 'D')
+					$strFrecuencia = $i.' days';
+				else if ($arrParametros['pres_frecuencia'] == 'S')
 					$strFrecuencia = $i.' weeks';
 				else if ($arrParametros['pres_frecuencia'] == 'Q')
 					$strFrecuencia = ($i*2).' weeks';

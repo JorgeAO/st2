@@ -42,6 +42,7 @@
 					<div class="form-group col-sm-3">
 						<label>Frecuencia de Pago</label>
 						<select class="form-control form-control-sm texto-12 intCalcular validar enviar" name="pres_frecuencia" id="pres_frecuencia" data-req="true">
+							<option value="D">Diario</option>
 							<option value="S">Semanal</option>
 							<option value="Q">Quincenal</option>
 							<option value="M">Mensual</option>

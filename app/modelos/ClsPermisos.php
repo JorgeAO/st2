@@ -99,7 +99,7 @@ class ClsPermisos extends Modelo
                      * Si la opción tiene enlace, se incluye en el menú
                      */
                     if ($arrPermisos[$i]['opci_enlace'] != '')
-                        $strMenu .= '<a class="dropdown-item texto-12" href="/apps/SmartTrader/'.$arrPermisos[$i]['opci_enlace'].'">'.$arrPermisos[$i]['opci_nombre'].'</a>';
+                        $strMenu .= '<a class="dropdown-item texto-12" href="/apps/st2/'.$arrPermisos[$i]['opci_enlace'].'">'.$arrPermisos[$i]['opci_nombre'].'</a>';
                 }
             }
 

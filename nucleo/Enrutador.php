@@ -13,7 +13,7 @@ try
 		if (!isset($_SESSION['usuario_sesion'][0]['usua_login']) || $_SESSION['usuario_sesion'][0]['usua_login'] == '')
 		{
 			$obRta->tipo = 'redirect';
-			$obRta->ruta = '/apps/SmartTrader/';
+			$obRta->ruta = '/apps/st2/';
 			echo json_encode($obRta);
 			exit();
 		}

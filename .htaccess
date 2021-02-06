@@ -43,8 +43,8 @@ RewriteEngine on
 # --------------------------------------------------------------------------
 # URL's del módulo de caja y bancos
 # --------------------------------------------------------------------------
-	RewriteRule ^caja/movimientos$ 								app/vistas/caja/Movimientos/Movimientos.php
-	RewriteRule ^caja/movimientosAdd$							app/vistas/caja/Movimientos/MovimientosAdd.php
+	RewriteRule ^caja/movimientos$ 								app/vistas/caja/movimientos/Movimientos.php
+	RewriteRule ^caja/movimientosAdd$							app/vistas/caja/movimientos/MovimientosAdd.php
 
 
 # --------------------------------------------------------------------------

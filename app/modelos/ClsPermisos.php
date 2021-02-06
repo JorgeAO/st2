@@ -54,7 +54,7 @@ class ClsPermisos extends Modelo
             $blIniciado = false;
 
             $strMenu = '<li class="nav-item">
-              <a class="nav-link texto-12" aria-current="page" href="/apps/SmartTrader/seguridad/principal"><i class="fa fa-home"></i> Inicio</a>
+              <a class="nav-link texto-12" aria-current="page" href="/apps/st2/seguridad/principal"><i class="fa fa-home"></i> Inicio</a>
             </li>';
 
             /**

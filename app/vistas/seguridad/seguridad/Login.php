@@ -56,5 +56,5 @@
 </div>
 <div class="col-sm-12 text-center">
 	<span class="texto-12">Desarrollado por:<br></span>
-	<img width="100px" src="/apps/SmartTrader/recursos/imagenes/aming_logo.png">
+	<img width="100px" src="/apps/st2/recursos/imagenes/aming_logo.png">
 </div>

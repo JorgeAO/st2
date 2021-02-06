@@ -27,7 +27,7 @@
 			<li class="nav-item dropdown dropleft">
 				<a class="nav-link dropdown-toggle" href="#" id="mod_user" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					​<picture>
-						<img src="/apps/SmartTrader/recursos/imagenes/avatar2.png" class="rounded-circle" title="<?=$_SESSION['usuario_sesion'][0]['usua_nombre']?>" width="30">
+						<img src="/apps/st2/recursos/imagenes/avatar2.png" class="rounded-circle" title="<?=$_SESSION['usuario_sesion'][0]['usua_nombre']?>" width="30">
 					</picture>
 				</a>
 				<div class="dropdown-menu" aria-labelledby="mod_user">

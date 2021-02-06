@@ -16,13 +16,13 @@ class BaseDatos
 				'servidor' => 'localhost',
 				'usuario' => 'user_smarttrader',
 				'clave' => 'st2020.*',
-				'basedatos' => 'bd_smarttrader',
+				'basedatos' => 'bd_st2',
 			];
 			$arrDatosCnx['pruebas'] = [
 				'servidor' => 'localhost',
 				'usuario' => 'user_smarttrader',
 				'clave' => 'st2020.*',
-				'basedatos' => 'bd_smarttrader_test',
+				'basedatos' => 'bd_st2_prueba',
 			];
 
 			return $arrDatosCnx[$strBaseDatos];
@@ -33,7 +33,7 @@ class BaseDatos
 		}
 	}
 
-	private function cnxConectar($strDestino = 'pruebas')
+	private function cnxConectar($strDestino = 'desarrollo')
 	{
 		try 
 		{

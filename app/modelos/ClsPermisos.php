@@ -103,8 +103,6 @@ class ClsPermisos extends Modelo
                 }
             }
 
-            //return $strMenu;
-
             $strMenu .= '</div></li>';
 
             return $strMenu;
